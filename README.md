@@ -19,6 +19,7 @@ python main.py --src imgs/test6.jpg --dst imgs/test7.jpg --out results/output6_7
 |![](imgs/test6.jpg) | ![](imgs/test7.jpg) | ![](results/output6_7_2d.jpg) |
 
 
+
 ## Install
 ### Requirements
 * `pip install -r requirements.txt`
@@ -43,6 +44,11 @@ python main_video.py --src_img imgs/test7.jpg --show --correct_color --save_path
 ### Video
 ```sh
 python main_video.py --src_img imgs/test7.jpg --video_path {video_path} --show --correct_color --save_path {*.avi}
+```
+
+### Replace face by frames
+```
+python .\main_video.py --dst_video {video_path} --src_video {video_path} --save_path {video_path} --correct_color
 ```
 
 ## More Results
