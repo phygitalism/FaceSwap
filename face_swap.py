@@ -199,7 +199,7 @@ def check_points(img,points):
     return False
 
 
-def face_swap(src_face, dst_face, src_points, dst_points, dst_shape, dst_img, args, end=48):
+def face_swap(src_face, dst_face, src_points, dst_points, dst_shape, dst_img, args, end=48, simple_copy=False):
     h, w = dst_face.shape[:2]
 
     ## 3d warp
@@ -229,7 +229,11 @@ def face_swap(src_face, dst_face, src_points, dst_points, dst_shape, dst_img, ar
     ##Poisson Blending
     r = cv2.boundingRect(mask)
     center = ((r[0] + int(r[2] / 2), r[1] + int(r[3] / 2)))
-    output = cv2.seamlessClone(warped_src_face, dst_face, mask, center, cv2.NORMAL_CLONE)
+
+    if simple_copy:
+        output = cv2.copyTo(warped_src_face, mask, dst=dst_face)
+    else:
+        output = cv2.seamlessClone(warped_src_face, dst_face, mask, center, cv2.NORMAL_CLONE)
 
     x, y, w, h = dst_shape
     dst_img_cp = dst_img.copy()

@@ -66,7 +66,7 @@ class VideoHandler(object):
                                 "Cannot find facelandmarks on destination video. Skip frame: %d", frame_num)
                         else:
                             dst_img = face_swap(src_face, dst_face, src_points,
-                                                dst_points, dst_shape, dst_img, self.args, 68)
+                                                dst_points, dst_shape, dst_img, self.args, 68, simple_copy=self.args.simple_copy)
 
                             self.writer.write(dst_img)
 
@@ -96,6 +96,7 @@ if __name__ == '__main__':
                         action='store_true', help='Show')
     parser.add_argument('--save_path', required=True,
                         help='Path for storing output video')
+    parser.add_argument('--simple_copy', action="store_true", help="Perform simple copy instead seamlessClone")
     args = parser.parse_args()
 
     dir_path = os.path.dirname(args.save_path)
